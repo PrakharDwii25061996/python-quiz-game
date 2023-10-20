@@ -1,6 +1,8 @@
 
 .env
 
-user.py
+user.txt
 
 # quizes/
+
+__pycache__/
