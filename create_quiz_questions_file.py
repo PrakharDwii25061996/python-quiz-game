@@ -63,5 +63,4 @@ if __name__ == '__main__':
 
 	number_of_quizes = int(input("Enter number of quizes: "))
 
-	for quiz in range(1, number_of_quizes + 1):
-		creating_files_for_quiz_questions(quiz)
+	creating_files_for_quiz_questions(quiz)
