@@ -1,25 +1,60 @@
 import random
 import pprint
+import shelve
 import os
 
-def create_a_quiz_file(quiz):
-	file = open(f'{os.getcwd()}/quizes/quiz_{quiz}.py', 'x')
-	file.close()
+
+def save_quiz_questions(quiz, quiz_questions):
+	with shelve.open(f'{os.getcwd()}/quizes/quiz.txt', 'c') as quiz_file:
+		quiz_file[f'quiz_{quiz}'] = quiz_questions
+		quiz_file.close()
+
+
+def get_question():
+
+	while True:
+		question = input("Enter Question: ")
+
+		if not question:
+			print("Please Enter valid question. ")
+		else:
+			break
+
+	return question
+
+
+def get_answer():
+
+	while True:
+		answer = input("Enter Answer: ")
+
+		if not answer:
+			print("Please Enter valid Answer")
+		else:
+			break
+
+	return answer
+
+
+def get_questions_and_answers(number_of_questions):
+
+	quiz_questions = {}
+	for ques in range(1, number_of_questions + 1):
+		question, answer = get_question(), get_answer()
+		quiz_questions[question] = answer
+
+
+def get_number_of_questions():
+	return int(input("Number of questions for this quiz: "))
+
 
 def creating_files_for_quiz_questions(quiz):
-	create_a_quiz_file(quiz)
 
-	countries_capital = {}
-	number_of_questions = int(input("Number of questions for this quiz: "))
+	number_of_questions = get_number_of_questions()
 
-	for ques in range(1, number_of_questions + 1):
-		question = input("Question: ")
-		answer = input("Answer: ")
-		countries_capital[question] = answer
+	get_questions_and_answers(number_of_questions)
 
-	file = open(f'{os.getcwd()}/quizes/quiz_{quiz}.py', 'a')
-	file.write(f'questions = {countries_capital}')
-	file.close()
+	save_quiz_questions(quiz, quiz_questions)
 
 
 if __name__ == '__main__':
@@ -28,5 +63,3 @@ if __name__ == '__main__':
 
 	for quiz in range(1, number_of_quizes + 1):
 		creating_files_for_quiz_questions(quiz)
-
-	# bla bla bla
