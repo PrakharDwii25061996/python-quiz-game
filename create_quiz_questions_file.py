@@ -43,6 +43,8 @@ def get_questions_and_answers(number_of_questions):
 		question, answer = get_question(), get_answer()
 		quiz_questions[question] = answer
 
+	return quiz_questions
+
 
 def get_number_of_questions():
 	return int(input("Number of questions for this quiz: "))
@@ -52,7 +54,7 @@ def creating_files_for_quiz_questions(quiz):
 
 	number_of_questions = get_number_of_questions()
 
-	get_questions_and_answers(number_of_questions)
+	quiz_questions = get_questions_and_answers(number_of_questions)
 
 	save_quiz_questions(quiz, quiz_questions)
 

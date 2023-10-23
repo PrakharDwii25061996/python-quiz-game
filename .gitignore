@@ -6,3 +6,5 @@
 # quizes/
 
 __pycache__/
+
+venv/
