@@ -18,7 +18,7 @@ def retreive_user(user_email, entered_password):
 
 def get_user_password_in_bytes(entered_password):
 	if not entered_password:
-		print("Please enter password")
+		print("Please enter valid password")
 		return None
 	else:
 		return entered_password.encode('utf-8')

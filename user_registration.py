@@ -19,9 +19,13 @@ def get_password():
 
 	while True:
 		password = getpass.getpass("Enter Password: ")
-
-		if (len(password) > conf.PASSWORD_MINIMUM_LENGTH) and (len(password) < conf.PASSWORD_MAXIMUM_LENGTH):
+		if not (len(password) >= conf.PASSWORD_MINIMUM_LENGTH) and (len(password) <= conf.PASSWORD_MAXIMUM_LENGTH):
 			print("Please Enter password having minimum characters 8 and maximum 15. ")
+		elif password.isupper() or password.islower() or password.isdigit():
+			print("""
+				Please Enter password containing atleast one small letters,
+				one capital letters and one numeric letter
+			""")
 		else:
 			break
 
@@ -51,13 +55,27 @@ def get_user_name():
 	return name
 
 
+def check_email_exists(email):
+
+	with shelve.open(f'{os.getcwd()}/user.txt', 'r') as user_file:
+		if email in dict(user_file).keys():
+			return True
+		user_file.close()	
+
+	return False
+
+
 def get_user_email():
 
 	while True:
 		email = input("Enter email: ")
 
-		if not (email and email.endswith('@gmail.com')):
+		if not email.endswith('@gmail.com'):
 			print("Please Enter correct email. ")
+		elif check_email_exists(email):
+			print("User email already exist. ")
+		elif not email:
+			print("Please enter valid email.")
 		else:
 			break
 
@@ -78,10 +96,10 @@ if __name__ == '__main__':
 
 	password = get_password()
 
+	user = get_user_data(user_name, user_email, password)
+
+	save_user_data(user)
+
 	print(user_name)
 	print(user_email)
 	print(password)
-
-	# user = get_user_data(user_name, user_email, password)
-
-	# save_user_data(user)
