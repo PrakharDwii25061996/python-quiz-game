@@ -61,6 +61,6 @@ def creating_files_for_quiz_questions(quiz):
 
 if __name__ == '__main__':
 
-	number_of_quizes = int(input("Enter number of quizes: "))
+	number_of_quiz = int(input("Enter number of quizes: "))
 
-	creating_files_for_quiz_questions(quiz)
+	creating_files_for_quiz_questions(number_of_quiz)
