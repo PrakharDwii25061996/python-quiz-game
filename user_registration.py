@@ -11,11 +11,22 @@ import conf
 
 
 def get_hashed_password(password):
+	"""
+	This Returns hashed password.
+
+	Arguments: str
+	 - User password
+
+	"""
 	salt = bcrypt.gensalt()
 	return bcrypt.hashpw(password.encode(), salt)
 
 
 def get_password():
+	"""
+	This return password after the user enters the correct and valid password.
+
+	"""
 
 	while True:
 		password = getpass.getpass("Enter Password: ")
@@ -33,6 +44,24 @@ def get_password():
 
 
 def get_user_data(user_name, user_email, password):
+	"""
+	This returns user data after hashing password
+
+	Arguments:
+	1. user_name: str 
+	   - Name of the register user
+
+	2. user_email: str
+	   - Name of the registered user
+
+	3. password: str
+	   - user password
+
+	Returns:
+	user: dict
+	   - Registered user
+
+	"""
 	user = {
 		'user_email': user_email, 
 		'user_name': user_name,
@@ -44,6 +73,11 @@ def get_user_data(user_name, user_email, password):
 
 
 def get_user_name():
+	"""
+	This function return user name
+	after entering user and validating it.
+
+	"""
 
 	while True:
 		name = input("Enter Name: ")
@@ -56,6 +90,16 @@ def get_user_name():
 
 
 def check_email_exists(email):
+	"""
+	This function checks whether the entered email exists or not.
+
+	Arguments
+	email: str
+	 - user entered email
+
+	Returns: bool
+
+	"""
 
 	with shelve.open(f'{os.getcwd()}/user.txt', 'r') as user_file:
 		if email in dict(user_file).keys():
@@ -66,6 +110,11 @@ def check_email_exists(email):
 
 
 def get_user_email():
+	"""
+	This return user email after the user enters the correct email
+	on terminal.
+
+	"""
 
 	while True:
 		email = input("Enter email: ")
@@ -83,6 +132,13 @@ def get_user_email():
 
 
 def save_user_data(user):
+	"""
+	This saves user data using shelve module in user.txt file
+
+	Arguments:
+	user : dict
+
+	"""
 	with shelve.open(f'{os.getcwd()}/user.txt', 'c') as user_file:
 		user_file[user_email] = user
 		user_file.close()
@@ -99,7 +155,3 @@ if __name__ == '__main__':
 	user = get_user_data(user_name, user_email, password)
 
 	save_user_data(user)
-
-	print(user_name)
-	print(user_email)
-	print(password)

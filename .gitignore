@@ -8,3 +8,10 @@
 __pycache__/
 
 venv/
+
+.idea/
+
+.pytest_cache/
+
+.pyc
+.poc
